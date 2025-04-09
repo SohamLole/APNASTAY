@@ -30,9 +30,10 @@
             background-color: var(--light);
             color: var(--dark);
             overflow-x: hidden;
+            line-height: 1.6;
         }
         
-        /* Improved Header with Better Logo Visibility */
+        /* Header Container */
         .header-container {
             height: 100vh;
             position: relative;
@@ -53,7 +54,7 @@
                 radial-gradient(circle at 80% 70%, var(--accent3) 0%, transparent 25%);
         }
         
-        /* Floating Shapes with Reduced Opacity */
+        /* Floating Shapes */
         .floating-shapes {
             position: absolute;
             width: 100%;
@@ -91,72 +92,22 @@
             50% { transform: translate(20px, 20px); }
         }
         
-        /* Improved Logo Visibility */
+        /* Header with Centered Logo */
         .main-header {
             position: relative;
             z-index: 10;
-            padding: 30px;
+            padding: 40px 30px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
         }
         
         .logo img {
-            height: 80px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)) 
-                   brightness(1.2);
+            height: 120px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)) brightness(1.2);
             transition: var(--transition);
-        }
-        
-        /* Navigation and Login Button */
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            position: relative;
-            padding: 10px 0;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--accent1);
-            transition: var(--transition);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .login-btn {
-            background: var(--light);
-            color: var(--primary);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            background: var(--accent1);
-            color: var(--light);
         }
         
         /* Hero Section */
@@ -167,14 +118,14 @@
             transform: translate(-50%, -50%);
             text-align: center;
             width: 100%;
-            padding: 0 20px;
+            padding: 0 30px;
             max-width: 1200px;
             z-index: 5;
         }
         
-        /* Content Sections with Smooth Transitions */
+        /* Content Sections */
         .content-section {
-            padding: 150px 0;
+            padding: 120px 0;
             position: relative;
             overflow: hidden;
             clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
@@ -192,11 +143,297 @@
         
         #location {
             background: linear-gradient(to bottom, #F0E6FF, #E6FFF0);
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+            padding-bottom: 150px;
         }
         
-        #contact {
-            background: linear-gradient(to bottom, #E6FFF0, #F9F9FF);
-            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+        /* Container Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        /* Feature Boxes */
+        .feature-box {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0 30px;
+        }
+        
+        .feature-item {
+            background: rgba(255, 195, 113, 0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-item i {
+            font-size: 2.2rem;
+            color: var(--accent1);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .feature-item:hover i {
+            transform: scale(1.1);
+        }
+        
+        .feature-item h4 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 16px 42px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: var(--accent1);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 95, 109, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--accent2);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 43, 141, 0.3);
+        }
+        
+        .btn-explore {
+            background: var(--primary);
+            color: white;
+            margin: 50px auto 0;
+            display: block;
+            max-width: 250px;
+        }
+        
+        .btn-explore:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 43, 141, 0.3);
+        }
+        
+        /* Photo Gallery */
+        .heritage-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .heritage-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .photo-gallery {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            height: 400px;
+        }
+        
+        .gallery-slides {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            height: 100%;
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gallery-controls {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .gallery-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+        
+        /* Map Container */
+        .map-container {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 40px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 100px 0 40px;
+            margin-top: -5%;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 30px;
+        }
+        
+        .footer-logo img {
+            height: 70px;
+            margin-bottom: 25px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .footer-logo p {
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+        
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links h4::after, .footer-contact h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            transform: translateX(5px);
+            color: var(--accent1);
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .footer-contact i {
+            margin-right: 12px;
+            margin-top: 3px;
+            color: var(--accent1);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            opacity: 0.6;
+            font-size: 0.9rem;
         }
         
         /* Scroll to Top Button */
@@ -204,8 +441,8 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: var(--primary);
             color: white;
@@ -213,11 +450,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255,95,109,0.4);
+            box-shadow: 0 5px 25px rgba(255,95,109,0.4);
             z-index: 100;
             opacity: 0;
             transform: translateY(20px);
             transition: var(--transition);
+            font-size: 1.2rem;
         }
         
         .scroll-top.visible {
@@ -230,99 +468,17 @@
             transform: translateY(-5px) !important;
         }
         
-        /* Login Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .login-modal {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            transform: translateY(50px);
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .modal-overlay.active .login-modal {
-            transform: translateY(0);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--dark);
-        }
-        
-        .login-modal h2 {
-            color: var(--secondary);
-            margin-bottom: 30px;
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-        
-        .modal-submit {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
-        }
-        
-        .modal-submit:hover {
-            background: var(--secondary);
-        }
-        
         /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .content-section {
+                padding: 100px 0;
+            }
+            
+            .feature-box {
+                padding: 40px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .header-container {
                 clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
@@ -332,15 +488,60 @@
                 clip-path: none;
                 margin-top: 0;
                 margin-bottom: 0;
-                padding: 100px 0;
+                padding: 80px 0;
             }
             
-            #contact {
-                clip-path: none;
+            #location {
+                padding-bottom: 100px;
             }
             
-            .nav-links {
-                display: none;
+            .logo img {
+                height: 100px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .heritage-container {
+                flex-direction: column;
+            }
+            
+            .photo-gallery {
+                width: 100%;
+                order: -1;
+                margin-bottom: 40px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .feature-box {
+                padding: 30px 20px;
+            }
+            
+            .btn {
+                padding: 14px 30px;
             }
         }
     </style>
@@ -358,68 +559,72 @@
             <div class="logo">
                 <img src="image.png" alt="ApnaStay Logo">
             </div>
-            
-            <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#accommodation">Accommodation</a>
-                <a href="#heritage">Heritage</a>
-                <a href="#location">Location</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            
-            <button class="login-btn" id="loginBtn">Login</button>
         </header>
         
         <div class="hero" id="home">
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 4rem; color: white; margin-bottom: 20px;">Your Comfort,<br>Our Priority!</h1>
-            <p style="font-size: 1.2rem; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 30px;">Experience premium living spaces designed for modern professionals</p>
-            <a href="#accommodation" class="cta-btn" style="display: inline-block; background: var(--accent1); color: var(--dark); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition);">Explore Rooms</a>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 4rem; color: white; margin-bottom: 25px; line-height: 1.2;">Your Comfort,<br>Our Priority!</h1>
+            <p style="font-size: 1.2rem; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 40px;">Experience premium living spaces designed for modern professionals</p>
+            <a class="btn btn-primary">Book a Visit</a>
         </div>
     </div>
     
     <!-- Accommodation Section -->
     <section id="accommodation" class="content-section">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--secondary);">Our Accommodation</h2>
+        <div class="container">
+            <h2>Our Accommodation</h2>
             
-            <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--dark);">Where Comfort Meets Convenience</h3>
-                <p style="margin-bottom: 30px; line-height: 1.6;">Designed for a hassle-free stay, our living spaces offer fully furnished rooms, high-speed WiFi, security, and essential services, ensuring a seamless experience.</p>
+            <div class="feature-box">
+                <h3>Where Comfort Meets Convenience</h3>
+                <p style="margin-bottom: 30px;">Designed for a hassle-free stay, our living spaces offer fully furnished rooms, high-speed WiFi, security, and essential services, ensuring a seamless experience.</p>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px;">
-                    <div style="background: rgba(255, 195, 113, 0.1); padding: 20px; border-radius: 15px;">
-                        <i class="fas fa-bed" style="font-size: 2rem; color: var(--accent1); margin-bottom: 15px;"></i>
-                        <h4 style="margin-bottom: 10px;">Fully Furnished</h4>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-bed"></i>
+                        <h4>Fully Furnished</h4>
                         <p>Comfortable beds and modern furniture</p>
                     </div>
-                    <div style="background: rgba(0, 210, 170, 0.1); padding: 20px; border-radius: 15px;">
-                        <i class="fas fa-wifi" style="font-size: 2rem; color: var(--accent3); margin-bottom: 15px;"></i>
-                        <h4 style="margin-bottom: 10px;">High-Speed WiFi</h4>
+                    <div class="feature-item" style="background: rgba(0, 210, 170, 0.1);">
+                        <i class="fas fa-wifi" style="color: var(--accent3);"></i>
+                        <h4>High-Speed WiFi</h4>
                         <p>Uninterrupted connectivity</p>
                     </div>
-                    <div style="background: rgba(122, 45, 222, 0.1); padding: 20px; border-radius: 15px;">
-                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--accent2); margin-bottom: 15px;"></i>
-                        <h4 style="margin-bottom: 10px;">24/7 Security</h4>
+                    <div class="feature-item" style="background: rgba(122, 45, 222, 0.1);">
+                        <i class="fas fa-shield-alt" style="color: var(--accent2);"></i>
+                        <h4>24/7 Security</h4>
                         <p>Safe and secure environment</p>
                     </div>
                 </div>
+                <button class="btn btn-explore" onclick="window.location.href='rooms.html'">Explore All Rooms</button>
+                
             </div>
         </div>
     </section>
     
-    <!-- Heritage Section -->
+    <!-- Heritage Section with Photo Gallery -->
     <section id="heritage" class="content-section">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--secondary);">Our Heritage</h2>
+        <div class="container">
+            <h2>Our Heritage</h2>
             
-            <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
-                <div style="flex: 1; min-width: 300px;">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--dark);">A Legacy of Trust</h3>
-                    <p style="margin-bottom: 30px; line-height: 1.6;">ApnaStay PG Services has been a trusted name in providing exceptional living experiences. Our focus is on quality, security, and a welcoming atmosphere that has made us the preferred choice for professionals across the city.</p>
-                    <a href="#" style="display: inline-block; background: var(--accent2); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition);">Discover Our Story</a>
+            <div class="heritage-container">
+                <div class="heritage-content">
+                    <h3>A Legacy of Trust</h3>
+                    <p style="margin-bottom: 30px;">ApnaStay PG Services has been a trusted name in providing exceptional living experiences. Our focus is on quality, security, and a welcoming atmosphere that has made us the preferred choice for professionals across the city.</p>
+                    <a href="#" class="btn btn-secondary">Discover Our Story</a>
                 </div>
-                <div style="flex: 1; min-width: 300px;">
-                    <img src="heritage.jpg" alt="Our Heritage" style="width: 100%; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
+
+                <div class="photo-gallery">
+                    <div class="gallery-slides">
+                        <div class="gallery-slide" style="background-image: url('building.jpg');"></div>
+                        <div class="gallery-slide" style="background-image: url('2\ Sharing.jpg');"></div>
+                        <div class="gallery-slide" style="background-image: url('3\ sharing.jpg');"></div>
+                        <div class="gallery-slide" style="background-image: url('Hall.jpg');"></div>
+                    </div>
+                    <div class="gallery-controls">
+                        <div class="gallery-dot active" data-index="0"></div>
+                        <div class="gallery-dot" data-index="1"></div>
+                        <div class="gallery-dot" data-index="2"></div>
+                        <div class="gallery-dot" data-index="3"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -427,15 +632,15 @@
     
     <!-- Location Section -->
     <section id="location" class="content-section">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--secondary);">Our Location</h2>
+        <div class="container">
+            <h2>Our Location</h2>
             
-            <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--dark);">Prime Location in the City</h3>
-                <p style="margin-bottom: 30px; line-height: 1.6;">We're conveniently located in the heart of the city, making your commute and daily life easier.</p>
+            <div class="feature-box">
+                <h3>Prime Location in the City</h3>
+                <p style="margin-bottom: 30px;">We're conveniently located in the heart of the city, making your commute and daily life easier.</p>
                 
-                <div style="height: 400px; border-radius: 15px; overflow: hidden; margin-bottom: 30px;">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.4806338957987!2d73.77459647524869!3d18.55235778254741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf0005c96227%3A0x5aad60cb691e6c1b!2sApnaStay%20PG%20Services!5e0!3m2!1sen!2sin!4v1743945462857!5m2!1sen!2sin"
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.4806338957987!2d73.77459647524869!3d18.55235778254741!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf0005c96227%3A0x5aad60cb691e6c1b!2sApnaStay%20PG%20Services!5e0!3m2!1sen!2sin!4v1743945462857!5m2!1sen!2sin"
                             width="100%" 
                             height="100%" 
                             style="border:0;" 
@@ -443,122 +648,47 @@
                             loading="lazy"></iframe>
                 </div>
                 
-                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                    <a href="https://maps.app.goo.gl/SMhNobosdzjZEGWz5" style="display: inline-block; background: var(--primary); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition);">Get Directions</a>
-                    <a href="#contact" style="display: inline-block; background: transparent; color: var(--primary); border: 2px solid var(--primary); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition);">Contact Us</a>
+                <div style="text-align: center;">
+                    <a href="https://maps.app.goo.gl/SMhNobosdzjZEGWz5" class="btn btn-primary">Get Directions</a>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact" class="content-section">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--secondary);">Contact Us</h2>
-            
-            <div style="background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--dark);">Ready to Find Your New Home?</h3>
-                <p style="margin-bottom: 30px; line-height: 1.6;">Get in touch with our team to schedule a visit or ask any questions about our accommodations.</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(255, 95, 109, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-                            <i class="fas fa-envelope" style="font-size: 30px; color: var(--primary);"></i>
-                        </div>
-                        <h4 style="margin-bottom: 10px;">Email Us</h4>
-                        <p>apnastaypg@gmail.com</p>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(255, 95, 109, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-                            <i class="fas fa-phone-alt" style="font-size: 30px; color: var(--primary);"></i>
-                        </div>
-                        <h4 style="margin-bottom: 10px;">Call Us</h4>
-                        <p>+91-8282817474</p>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(255, 95, 109, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-                            <i class="fas fa-map-marker-alt" style="font-size: 30px; color: var(--primary);"></i>
-                        </div>
-                        <h4 style="margin-bottom: 10px;">Visit Us</h4>
-                        <p>Baner, Pune</p>
-                    </div>
-                </div>
-                
-                <form>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                        <input type="text" placeholder="Your Name" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd;">
-                        <input type="email" placeholder="Your Email" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd;">
-                    </div>
-                    <textarea placeholder="Your Message" style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; min-height: 150px; margin-bottom: 20px;"></textarea>
-                    <button type="submit" style="width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: var(--transition);">Send Message</button>
-                </form>
             </div>
         </div>
     </section>
     
     <!-- Footer -->
-    <footer style="background: var(--dark); color: white; padding: 80px 0 30px; margin-top: -5%;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px;">
-                <div>
-                    <img src="image.png" alt="ApnaStay Logo" style="height: 60px; margin-bottom: 20px; filter: brightness(0) invert(1);">
-                    <p style="opacity: 0.8; line-height: 1.6;">Providing premium accommodations for working professionals with comfort and security as our top priorities.</p>
-                </div>
-                
-                <div>
-                    <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Quick Links</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 10px;"><a href="#home" style="color: white; opacity: 0.8; text-decoration: none; transition: var(--transition);">Home</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#accommodation" style="color: white; opacity: 0.8; text-decoration: none; transition: var(--transition);">Accommodation</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#heritage" style="color: white; opacity: 0.8; text-decoration: none; transition: var(--transition);">Our Heritage</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#location" style="color: white; opacity: 0.8; text-decoration: none; transition: var(--transition);">Location</a></li>
-                        <li style="margin-bottom: 10px;"><a href="#contact" style="color: white; opacity: 0.8; text-decoration: none; transition: var(--transition);">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 style="font-size: 1.2rem; margin-bottom: 20px;">Contact Info</h4>
-                    <p style="margin-bottom: 15px; opacity: 0.8;"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Baner, Pune</p>
-                    <p style="margin-bottom: 15px; opacity: 0.8;"><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +91-8282817474</p>
-                    <p style="opacity: 0.8;"><i class="fas fa-envelope" style="margin-right: 10px;"></i> apnastaypg@gmail.com</p>
-                </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="image.png" alt="ApnaStay Logo">
+                <p>Providing premium accommodations for working professionals with comfort and security as our top priorities.</p>
             </div>
             
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center;">
-                <p style="opacity: 0.6;">&copy; 2025 ApnaStay PG Services. All Rights Reserved.</p>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#accommodation">Accommodation</a></li>
+                    <li><a href="#heritage">Our Heritage</a></li>
+                    <li><a href="#location">Location</a></li>
+                </ul>
             </div>
+            
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Baner, Pune</p>
+                <p><i class="fas fa-phone-alt"></i> +91-8282817474</p>
+                <p><i class="fas fa-envelope"></i> apnastaypg@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 ApnaStay PG Services. All Rights Reserved.</p>
         </div>
     </footer>
     
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
-    </div>
-    
-    <!-- Login Modal -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="login-modal">
-            <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
-            <h2>Login to Your Account</h2>
-            
-            <form>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password">
-                </div>
-                
-                <button type="submit" class="modal-submit">Login</button>
-                
-                <p style="text-align: center; margin-top: 20px;">Don't have an account? <a href="#" style="color: var(--primary); text-decoration: none;">Register here</a></p>
-            </form>
-        </div>
     </div>
     
     <script>
@@ -580,29 +710,6 @@
             });
         });
         
-        // Login Modal
-        const loginBtn = document.getElementById('loginBtn');
-        const loginModal = document.getElementById('loginModal');
-        const closeModal = document.getElementById('closeModal');
-        
-        loginBtn.addEventListener('click', function() {
-            loginModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeModal.addEventListener('click', function() {
-            loginModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close modal when clicking outside
-        loginModal.addEventListener('click', function(e) {
-            if (e.target === loginModal) {
-                loginModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -618,6 +725,53 @@
                     });
                 }
             });
+        });
+        
+        // Photo Gallery Auto-Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelector('.gallery-slides');
+            const dots = document.querySelectorAll('.gallery-dot');
+            const totalSlides = document.querySelectorAll('.gallery-slide').length;
+            let currentIndex = 0;
+            let slideInterval;
+
+            function goToSlide(index) {
+                currentIndex = (index + totalSlides) % totalSlides;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            // Start auto-sliding
+            function startSlider() {
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+
+            // Pause on hover
+            const gallery = document.querySelector('.photo-gallery');
+            gallery.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            gallery.addEventListener('mouseleave', startSlider);
+
+            // Dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-index'));
+                    goToSlide(slideIndex);
+                });
+            });
+
+            // Initialize
+            startSlider();
         });
     </script>
 </body>
