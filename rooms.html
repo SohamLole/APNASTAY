@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApnaStay PG - Room Options</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5F6D;
+            --secondary: #2A2B8D;
+            --accent1: #FFC371;
+            --accent2: #7B2DDE;
+            --accent3: #00D2AA;
+            --dark: #1A1A2E;
+            --light: #F9F9FF;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 40px;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .back-btn {
+            padding: 10px 25px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 95, 109, 0.3);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent1);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Amenities Section */
+        .amenities-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+        
+        .amenities-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .amenity-item {
+            background: rgba(255, 195, 113, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .amenity-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .amenity-item i {
+            font-size: 2rem;
+            color: var(--accent1);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Room Options */
+        .room-section {
+            margin-bottom: 80px;
+        }
+        
+        .room-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        
+        .room-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .room-details {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+        }
+        
+        .room-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .room-features {
+            margin-bottom: 30px;
+        }
+        
+        .room-features li {
+            margin-bottom: 12px;
+            list-style-type: none;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .room-features li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--accent3);
+            position: absolute;
+            left: 0;
+        }
+        
+        .book-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 95, 109, 0.3);
+        }
+        
+        .book-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 43, 141, 0.3);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .amenities-section, .room-details {
+                padding: 30px;
+            }
+            
+            .room-container {
+                flex-direction: column;
+            }
+            
+            .room-image {
+                width: 100%;
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="page-header">
+        <div class="logo">
+            <img src="image.png" alt="ApnaStay Logo">
+        </div>
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">Our Room Options</h1>
+        
+        <!-- Amenities Section -->
+        <section class="amenities-section">
+            <h2 class="amenities-title">Premium Amenities Included</h2>
+            <div class="amenities-grid">
+                <div class="amenity-item">
+                    <i class="fas fa-water"></i>
+                    <h3>24/7 Solar Heated Water</h3>
+                    <p>Eco-friendly hot water supply</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-filter"></i>
+                    <h3>RO Purified Water</h3>
+                    <p>Clean drinking water available</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-blender"></i>
+                    <h3>Refrigerator</h3>
+                    <p>Shared fridge for all residents</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Common Dining Area</h3>
+                    <p>Spacious area for meals</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-fire"></i>
+                    <h3>Induction Stove</h3>
+                    <p>For heating food</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-tv"></i>
+                    <h3>Entertainment TV</h3>
+                    <p>Common area television</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-camera"></i>
+                    <h3>24/7 CCTV Surveillance</h3>
+                    <p>Complete security</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-broom"></i>
+                    <h3>Daily Cleaning</h3>
+                    <p>Regular maintenance</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-couch"></i>
+                    <h3>Fully Furnished</h3>
+                    <p>All essential furniture</p>
+                </div>
+                <div class="amenity-item">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Washing Machine</h3>
+                    <p>Laundry facilities</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4 Sharing Room -->
+        <section class="room-section">
+            <div class="room-container">
+                <div class="room-image" style="background-image: url('4-sharing.jpg');"></div>
+                <div class="room-details">
+                    <h2 class="room-title">4-Sharing Room</h2>
+                    <ul class="room-features">
+                        <li>Spacious 4-person accommodation</li>
+                        <li>Individual beds with storage</li>
+                        <li>Shared study table</li>
+                        <li>Ample natural light</li>
+                        <li>Personal lockers</li>
+                        <li>High-speed WiFi</li>
+                    </ul>
+                    <button class="book-btn">Book a Visit</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3 Sharing Room -->
+        <section class="room-section">
+            <div class="room-container">
+                <div class="room-image" style="background-image: url('3-sharing.jpg');"></div>
+                <div class="room-details">
+                    <h2 class="room-title">3-Sharing Room</h2>
+                    <ul class="room-features">
+                        <li>Comfortable 3-person space</li>
+                        <li>Ergonomic furniture</li>
+                        <li>Individual study lamps</li>
+                        <li>Enhanced privacy partitions</li>
+                        <li>Personal lockers</li>
+                        <li>High-speed WiFi</li>
+                    </ul>
+                    <button class="book-btn">Book a Visit</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2 Sharing Room -->
+        <section class="room-section">
+            <div class="room-container">
+                <div class="room-image" style="background-image: url('2-sharing.jpg');"></div>
+                <div class="room-details">
+                    <h2 class="room-title">2-Sharing Room</h2>
+                    <ul class="room-features">
+                        <li>Premium 2-person accommodation</li>
+                        <li>Larger personal space</li>
+                        <li>Dedicated study tables</li>
+                        <li>Enhanced privacy</li>
+                        <li>Spacious lockers</li>
+                        <li>High-speed WiFi</li>
+                    </ul>
+                    <button class="book-btn">Book a Visit</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Book button click handler
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Thank you for your interest! Our team will contact you shortly to schedule your visit.');
+            });
+        });
+    </script>
+</body>
+</html>
