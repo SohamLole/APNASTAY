@@ -467,6 +467,57 @@
             background: var(--secondary);
             transform: translateY(-5px) !important;
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 700px;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .close-btn:hover {
+            color: var(--primary);
+        }
+        
+        .form-iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 10px;
+        }
         
         /* Responsive Adjustments */
         @media (max-width: 992px) {
@@ -521,6 +572,14 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
+
+            .modal-content {
+                padding: 15px;
+            }
+            
+            .form-iframe {
+                height: 70vh;
+            }
         }
         
         @media (max-width: 576px) {
@@ -564,7 +623,7 @@
         <div class="hero" id="home">
             <h1 style="font-family: 'Playfair Display', serif; font-size: 4rem; color: white; margin-bottom: 25px; line-height: 1.2;">Your Comfort,<br>Our Priority!</h1>
             <p style="font-size: 1.2rem; color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 40px;">Experience premium living spaces designed for modern professionals</p>
-            <a class="btn btn-primary">Book a Visit</a>
+            <button class="btn btn-primary" onclick="document.getElementById('bookingModal').style.display='flex'">Book a Visit</button>
         </div>
     </div>
     
@@ -595,7 +654,6 @@
                     </div>
                 </div>
                 <button class="btn btn-explore" onclick="window.location.href='rooms.html'">Explore All Rooms</button>
-                
             </div>
         </div>
     </section>
@@ -609,7 +667,7 @@
                 <div class="heritage-content">
                     <h3>A Legacy of Trust</h3>
                     <p style="margin-bottom: 30px;">ApnaStay PG Services has been a trusted name in providing exceptional living experiences. Our focus is on quality, security, and a welcoming atmosphere that has made us the preferred choice for professionals across the city.</p>
-                    <a href="#" class="btn btn-secondary">Discover Our Story</a>
+                    <button class="btn btn-secondary" onclick="document.getElementById('bookingModal').style.display='flex'">Book a Visit</button>
                 </div>
 
                 <div class="photo-gallery">
@@ -649,7 +707,7 @@
                 </div>
                 
                 <div style="text-align: center;">
-                    <a href="https://maps.app.goo.gl/SMhNobosdzjZEGWz5" class="btn btn-primary">Get Directions</a>
+                    <button class="btn btn-primary" onclick="document.getElementById('bookingModal').style.display='flex'">Book a Visit</button>
                 </div>
             </div>
         </div>
@@ -689,6 +747,20 @@
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('bookingModal').style.display='none'">&times;</span>
+            <iframe 
+                class="form-iframe"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfigvtjGx_MXk45o9WSz7w8mdNA7F1kU3YE_hYETZvknvUqSg/viewform?embedded=true"
+                frameborder="0"
+                marginheight="0"
+                marginwidth="0"
+            >Loading…</iframe>
+        </div>
     </div>
     
     <script>
@@ -772,6 +844,13 @@
 
             // Initialize
             startSlider();
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('bookingModal')) {
+                document.getElementById('bookingModal').style.display = 'none';
+            }
         });
     </script>
 </body>
