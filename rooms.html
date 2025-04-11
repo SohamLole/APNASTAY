@@ -6,6 +6,7 @@
     <title>ApnaStay PG - Room Options</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="image.png">
     <style>
         :root {
             --primary: #FF5F6D;
@@ -31,7 +32,7 @@
             line-height: 1.5;
         }
         
-        /* Compact Header */
+        /* Header */
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -82,7 +83,7 @@
             text-align: center;
         }
         
-        /* Compact Amenities Section */
+        /* Amenities */
         .amenities-section {
             background: white;
             border-radius: 15px;
@@ -128,7 +129,7 @@
             opacity: 0.9;
         }
         
-        /* Room Options */
+        /* Rooms */
         .room-section {
             margin-bottom: 50px;
         }
@@ -207,6 +208,57 @@
             transform: translateY(-2px);
         }
         
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 95%;
+            max-width: 700px;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+        
+        .close-btn:hover {
+            color: var(--primary);
+        }
+        
+        .form-iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 10px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -239,6 +291,14 @@
             .room-title {
                 font-size: 1.4rem;
             }
+            
+            .modal-content {
+                padding: 15px;
+            }
+            
+            .form-iframe {
+                height: 70vh;
+            }
         }
     </style>
 </head>
@@ -246,7 +306,7 @@
     <!-- Header -->
     <header class="page-header">
         <div class="logo">
-            <img src="image.png" alt="ApnaStay Logo">
+            <a href="index.html"><img src="image.png" alt="ApnaStay Logo"></a>
         </div>
         <a href="index.html" class="back-btn">
             <i class="fas fa-arrow-left"></i> Back
@@ -257,7 +317,7 @@
     <main class="container">
         <h1 class="page-title">Our Room Options</h1>
         
-        <!-- Compact Amenities Section -->
+        <!-- Amenities -->
         <section class="amenities-section">
             <h2 class="amenities-title">Included Amenities</h2>
             <div class="amenities-grid">
@@ -314,7 +374,7 @@
             </div>
         </section>
         
-        <!-- Room Options -->
+        <!-- Rooms -->
         <section class="room-section">
             <div class="room-container">
                 <div class="room-image" style="background-image: url('Hall.jpg');"></div>
@@ -326,7 +386,7 @@
                         <li>Ample natural light</li>
                         <li>Personal cupboards</li>
                     </ul>
-                    <button class="book-btn">Book a Visit</button>
+                    <button class="book-btn" data-room="4-Sharing Room">Book a Visit</button>
                 </div>
             </div>
         </section>
@@ -343,7 +403,7 @@
                         <li>Enhanced privacy</li>
                         <li>Personal cupboards</li>
                     </ul>
-                    <button class="book-btn">Book a Visit</button>
+                    <button class="book-btn" data-room="3-Sharing Room">Book a Visit</button>
                 </div>
             </div>
         </section>
@@ -361,18 +421,52 @@
                         <li>Enhanced privacy</li>
                         <li>Personal cupboards</li>
                     </ul>
-                    <button class="book-btn">Book a Visit</button>
+                    <button class="book-btn" data-room="2-Sharing Room">Book a Visit</button>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <iframe 
+                class="form-iframe"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfigvtjGx_MXk45o9WSz7w8mdNA7F1kU3YE_hYETZvknvUqSg/viewform?embedded=true"
+                frameborder="0"
+                marginheight="0"
+                marginwidth="0"
+            >Loading…</iframe>
+        </div>
+    </div>
+
     <script>
-        // Book button click handler
-        document.querySelectorAll('.book-btn').forEach(button => {
+        // Modal Control
+        const modal = document.getElementById('bookingModal');
+        const bookButtons = document.querySelectorAll('.book-btn');
+        const closeBtn = document.querySelector('.close-btn');
+        
+        // Open modal
+        bookButtons.forEach(button => {
             button.addEventListener('click', function() {
-                alert('Thank you for your interest! Our team will contact you shortly to schedule your visit.');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
             });
+        });
+        
+        // Close modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
         });
     </script>
 </body>
