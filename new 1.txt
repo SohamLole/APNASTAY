@@ -1,0 +1,34 @@
+1.	LOGO: - top left corner.
+2.	LOGIN: - a button on the top right corner.
+3.	User cases for LOGIN button: -
+	a.	2 types of LOGINS: - 
+		i.	ADMIN: -
+			1.	Contains all information of TENANT.
+			2.	It should be able to add new TENANT based on the Beds, i.e. It will create account of TENANT linked to that particular bed.
+			3.	Should be able to change the Beds of TENANT.
+			4.	Track Rent Payment of Each Tenant at once.
+			5.	Should Contain Payment Information for Each Month – Each Year
+			6.	Should be able to add new Buildings - new Rooms – new Beds in Accommodation Section directly on the website and code should automatically be created for the same without hampering the integrity of the site.
+			7.	Should be Able to show Free and Accommodated Beds Separately.
+			8.	Each Bed can be linked only to one single account.
+			9.	Should be able to Track Expenses Building wise, i.e. admin should able to add amount and reason for expenses.
+			10.	Thus, it should be able to show Profit - Loss in Bar or Line Graph.
+		ii.	TENANT: -
+			1.	After LOGIN it should show a FORM to TENANT.
+			2.	FORM contains: -
+				a.	Pre-filled Fields by ADMIN (*can be changed only by ADMIN)-
+					i.		Bed Number.
+					ii.		Building Name.
+					iii.	UserName.
+					iv.		Amount of Rent and Deposit.
+				b.	Filled by TENANT: -
+					i.		Photo
+					ii.		Age
+					iii.	Gender
+					iv.		Profession (student/worker – if worker then specify profession).
+					v.		Student Specify Institute/ worker specify company.
+					vi.		Address of Institute/Company.
+					vii.	
+	b.	Only ADMIN can create a TENANT account.
+	c.	After Creating TENANT account - TENANT can change password after LOGIN.
+	d.	ADMIN can terminate TENANT account. (But should still retain TENANT Information with ADMIN).
