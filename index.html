@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="image.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary: #FF5F6D;
@@ -92,22 +93,42 @@
             50% { transform: translate(20px, 20px); }
         }
         
-        /* Header with Centered Logo */
+        /* Header with Logo and Login */
         .main-header {
             position: relative;
             z-index: 10;
-            padding: 40px 30px;
+            padding: 30px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
         }
         
         .logo img {
-            height: 120px;
+            height: 80px;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)) brightness(1.2);
             transition: var(--transition);
+        }
+        
+        .login-btn {
+            padding: 12px 30px;
+            background: var(--accent1);
+            color: var(--dark);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1rem;
+        }
+        
+        .login-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 95, 109, 0.3);
         }
         
         /* Hero Section */
@@ -490,6 +511,8 @@
             max-width: 700px;
             position: relative;
             animation: modalFadeIn 0.3s;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         @keyframes modalFadeIn {
@@ -517,6 +540,273 @@
             height: 80vh;
             border: none;
             border-radius: 10px;
+        }
+        
+        /* Login Form Styles */
+        .login-form {
+            padding: 20px;
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent1);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 195, 113, 0.3);
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent1);
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .form-submit:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .user-type-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .user-type-btn {
+            padding: 10px 20px;
+            background: #eee;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .user-type-btn:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .user-type-btn:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .user-type-btn.active {
+            background: var(--accent1);
+            color: var(--dark);
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dashboard-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        .logout-btn {
+            padding: 8px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .logout-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .dashboard-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .dashboard-section h3 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+            font-size: 1.4rem;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Admin Dashboard Styles */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .admin-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            transition: var(--transition);
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .admin-card h4 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-card h4 i {
+            margin-right: 10px;
+            color: var(--accent1);
+        }
+        
+        .admin-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .admin-card .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        /* Tenant Form Styles */
+        .tenant-form .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .tenant-form .form-col {
+            flex: 1;
+        }
+        
+        .tenant-form .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .tenant-form .photo-upload {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .tenant-form .photo-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #eee;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tenant-form .photo-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .tenant-form .upload-btn {
+            padding: 8px 15px;
+            background: #eee;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .tenant-form .upload-btn:hover {
+            background: #ddd;
+        }
+        
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .data-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .table-actions .btn {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            height: 400px;
+            margin-top: 30px;
         }
         
         /* Responsive Adjustments */
@@ -547,7 +837,7 @@
             }
             
             .logo img {
-                height: 100px;
+                height: 70px;
             }
             
             .hero h1 {
@@ -580,6 +870,11 @@
             .form-iframe {
                 height: 70vh;
             }
+            
+            .tenant-form .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
         
         @media (max-width: 576px) {
@@ -602,6 +897,17 @@
             .btn {
                 padding: 14px 30px;
             }
+            
+            .login-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
         }
     </style>
 </head>
@@ -618,6 +924,7 @@
             <div class="logo">
                 <img src="image.png" alt="ApnaStay Logo">
             </div>
+            <button class="login-btn" id="loginBtn">LOGIN</button>
         </header>
         
         <div class="hero" id="home">
@@ -667,14 +974,14 @@
                 <div class="heritage-content">
                     <h3>A Legacy of Trust</h3>
                     <p style="margin-bottom: 30px;">ApnaStay PG Services has been a trusted name in providing exceptional living experiences. Our focus is on quality, security, and a welcoming atmosphere that has made us the preferred choice for professionals across the city.</p>
-                    <button class="btn btn-secondary" .style.display='flex'>Explore More</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('bookingModal').style.display='flex'">Explore More</button>
                 </div>
 
                 <div class="photo-gallery">
                     <div class="gallery-slides">
                         <div class="gallery-slide" style="background-image: url('building.jpg');"></div>
-                        <div class="gallery-slide" style="background-image: url('2\ Sharing.jpg');"></div>
-                        <div class="gallery-slide" style="background-image: url('3\ sharing.jpg');"></div>
+                        <div class="gallery-slide" style="background-image: url('2 Sharing.jpg');"></div>
+                        <div class="gallery-slide" style="background-image: url('3 sharing.jpg');"></div>
                         <div class="gallery-slide" style="background-image: url('Hall.jpg');"></div>
                     </div>
                     <div class="gallery-controls">
@@ -759,44 +1066,1915 @@
         </div>
     </div>
     
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('loginModal').style.display='none'">&times;</span>
+            <div class="login-form">
+                <h2>Login to Your Account</h2>
+                
+                <div class="user-type-toggle">
+                    <button class="user-type-btn active" id="tenantLoginBtn">Tenant</button>
+                    <button class="user-type-btn" id="adminLoginBtn">Admin</button>
+                </div>
+                
+                <form id="tenantLoginForm">
+                    <div class="form-group">
+                        <label for="tenantUsername">Username</label>
+                        <input type="text" id="tenantUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tenantPassword">Password</label>
+                        <input type="password" id="tenantPassword" required>
+                    </div>
+                    <button type="submit" class="form-submit">Login</button>
+                </form>
+                
+                <form id="adminLoginForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="adminUsername">Admin ID</label>
+                        <input type="text" id="adminUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" required>
+                    </div>
+                    <button type="submit" class="form-submit">Login as Admin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Dashboard -->
+    <div class="dashboard" id="adminDashboard">
+        <div class="dashboard-header">
+            <h2 class="dashboard-title">Admin Dashboard</h2>
+            <button class="logout-btn" id="adminLogoutBtn">Logout</button>
+        </div>
+        
+        <div class="admin-grid">
+            <div class="admin-card">
+                <h4><i class="fas fa-users"></i> Tenant Management</h4>
+                <p>View, add, edit, and manage all tenant accounts and their details.</p>
+                <button class="btn btn-primary" id="manageTenantsBtn">Manage Tenants</button>
+            </div>
+            <div class="admin-card">
+                <h4><i class="fas fa-bed"></i> Bed Management</h4>
+                <p>Manage bed allocations, view occupancy status, and assign beds to tenants.</p>
+                <button class="btn btn-primary" id="manageBedsBtn">Manage Beds</button>
+            </div>
+            <div class="admin-card">
+                <h4><i class="fas fa-money-bill-wave"></i> Rent Payments</h4>
+                <p>Track rent payments, view payment history, and generate reports.</p>
+                <button class="btn btn-primary" id="managePaymentsBtn">Manage Payments</button>
+            </div>
+            <div class="admin-card">
+                <h4><i class="fas fa-building"></i> Property Management</h4>
+                <p>Add new buildings, rooms, and beds to the accommodation system.</p>
+                <button class="btn btn-primary" id="managePropertiesBtn">Manage Properties</button>
+            </div>
+            <div class="admin-card">
+                <h4><i class="fas fa-chart-line"></i> Financial Reports</h4>
+                <p>View financial reports, track expenses, and analyze profit/loss.</p>
+                <button class="btn btn-primary" id="financialReportsBtn">View Reports</button>
+            </div>
+            <div class="admin-card">
+                <h4><i class="fas fa-file-invoice-dollar"></i> Expense Tracking</h4>
+                <p>Record and track all property-related expenses.</p>
+                <button class="btn btn-primary" id="expenseTrackingBtn">Track Expenses</button>
+            </div>
+        </div>
+        
+        <!-- Tenant Management Section -->
+        <div class="dashboard-section" id="tenantManagementSection" style="display: none;">
+            <h3>Tenant Management</h3>
+            <button class="btn btn-secondary" id="addTenantBtn">Add New Tenant</button>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tenant ID</th>
+                        <th>Name</th>
+                        <th>Bed No.</th>
+                        <th>Building</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tenantTableBody">
+                    <!-- Tenant data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Add Tenant Modal -->
+        <div class="modal" id="addTenantModal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="document.getElementById('addTenantModal').style.display='none'">&times;</span>
+                <h3>Add New Tenant</h3>
+                <form id="newTenantForm">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="tenantFullName">Full Name</label>
+                                <input type="text" id="tenantFullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenantEmail">Email</label>
+                                <input type="email" id="tenantEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenantPhone">Phone Number</label>
+                                <input type="tel" id="tenantPhone" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="tenantBuilding">Building</label>
+                                <select id="tenantBuilding" required>
+                                    <option value="">Select Building</option>
+                                    <!-- Buildings will be populated here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenantRoom">Room</label>
+                                <select id="tenantRoom" required disabled>
+                                    <option value="">Select Room</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenantBed">Bed</label>
+                                <select id="tenantBed" required disabled>
+                                    <option value="">Select Bed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="tenantRent">Monthly Rent (₹)</label>
+                                <input type="number" id="tenantRent" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="tenantDeposit">Security Deposit (₹)</label>
+                                <input type="number" id="tenantDeposit" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Tenant Account</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Bed Management Section -->
+        <div class="dashboard-section" id="bedManagementSection" style="display: none;">
+            <h3>Bed Management</h3>
+            
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="filterBuilding">Filter by Building</label>
+                        <select id="filterBuilding">
+                            <option value="">All Buildings</option>
+                            <!-- Buildings will be populated here -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="filterStatus">Filter by Status</label>
+                        <select id="filterStatus">
+                            <option value="">All Statuses</option>
+                            <option value="occupied">Occupied</option>
+                            <option value="vacant">Vacant</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Bed ID</th>
+                        <th>Building</th>
+                        <th>Room</th>
+                        <th>Bed No.</th>
+                        <th>Status</th>
+                        <th>Tenant</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bedTableBody">
+                    <!-- Bed data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Payment Management Section -->
+        <div class="dashboard-section" id="paymentManagementSection" style="display: none;">
+            <h3>Rent Payment Tracking</h3>
+            
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="paymentMonth">Month</label>
+                        <select id="paymentMonth">
+                            <option value="">All Months</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="paymentYear">Year</label>
+                        <select id="paymentYear">
+                            <option value="">All Years</option>
+                            <!-- Years will be populated here -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="paymentStatus">Payment Status</label>
+                        <select id="paymentStatus">
+                            <option value="">All Statuses</option>
+                            <option value="paid">Paid</option>
+                            <option value="unpaid">Unpaid</option>
+                            <option value="partial">Partial</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tenant</th>
+                        <th>Bed No.</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Amount Due</th>
+                        <th>Amount Paid</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="paymentTableBody">
+                    <!-- Payment data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Property Management Section -->
+        <div class="dashboard-section" id="propertyManagementSection" style="display: none;">
+            <h3>Property Management</h3>
+            
+            <div class="admin-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px;">
+                <button class="btn btn-secondary" id="addBuildingBtn">Add New Building</button>
+                <button class="btn btn-secondary" id="addRoomBtn">Add New Room</button>
+                <button class="btn btn-secondary" id="addBedBtn">Add New Bed</button>
+            </div>
+            
+            <h4>Current Properties</h4>
+            <div id="propertyAccordion">
+                <!-- Property data will be populated here -->
+            </div>
+        </div>
+        
+        <!-- Financial Reports Section -->
+        <div class="dashboard-section" id="financialReportsSection" style="display: none;">
+            <h3>Financial Reports</h3>
+            
+            <div class="form-row">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="reportType">Report Type</label>
+                        <select id="reportType">
+                            <option value="monthly">Monthly Report</option>
+                            <option value="yearly">Yearly Report</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col" id="monthlySelection">
+                    <div class="form-group">
+                        <label for="reportMonth">Month</label>
+                        <select id="reportMonth">
+                            <option value="">All Months</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col" id="yearlySelection">
+                    <div class="form-group">
+                        <label for="reportYear">Year</label>
+                        <select id="reportYear">
+                            <option value="">All Years</option>
+                            <!-- Years will be populated here -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col" id="customSelection" style="display: none;">
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+                <div class="form-col">
+                    <button class="btn btn-primary" id="generateReportBtn" style="margin-top: 24px;">Generate Report</button>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="financialChart"></canvas>
+            </div>
+            
+            <div id="reportSummary" style="margin-top: 30px;">
+                <!-- Report summary will be displayed here -->
+            </div>
+        </div>
+        
+        <!-- Expense Tracking Section -->
+        <div class="dashboard-section" id="expenseTrackingSection" style="display: none;">
+            <h3>Expense Tracking</h3>
+            
+            <button class="btn btn-secondary" id="addExpenseBtn">Add New Expense</button>
+            
+            <div class="form-row" style="margin-top: 20px;">
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="expenseBuilding">Filter by Building</label>
+                        <select id="expenseBuilding">
+                            <option value="">All Buildings</option>
+                            <!-- Buildings will be populated here -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="expenseCategory">Filter by Category</label>
+                        <select id="expenseCategory">
+                            <option value="">All Categories</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="repairs">Repairs</option>
+                            <option value="supplies">Supplies</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="expenseMonth">Month</label>
+                        <select id="expenseMonth">
+                            <option value="">All Months</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-col">
+                    <div class="form-group">
+                        <label for="expenseYear">Year</label>
+                        <select id="expenseYear">
+                            <option value="">All Years</option>
+                            <!-- Years will be populated here -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Building</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount (₹)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="expenseTableBody">
+                    <!-- Expense data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Add Expense Modal -->
+        <div class="modal" id="addExpenseModal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="document.getElementById('addExpenseModal').style.display='none'">&times;</span>
+                <h3>Add New Expense</h3>
+                <form id="newExpenseForm">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="expenseDate">Date</label>
+                                <input type="date" id="expenseDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseBuildingSelect">Building</label>
+                                <select id="expenseBuildingSelect" required>
+                                    <option value="">Select Building</option>
+                                    <!-- Buildings will be populated here -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label for="expenseAmount">Amount (₹)</label>
+                                <input type="number" id="expenseAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseCategorySelect">Category</label>
+                                <select id="expenseCategorySelect" required>
+                                    <option value="">Select Category</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="repairs">Repairs</option>
+                                    <option value="supplies">Supplies</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDescription">Description</label>
+                        <textarea id="expenseDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseReceipt">Upload Receipt (Optional)</label>
+                        <input type="file" id="expenseReceipt">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Expense</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tenant Dashboard -->
+    <div class="dashboard" id="tenantDashboard">
+        <div class="dashboard-header">
+            <h2 class="dashboard-title">Tenant Dashboard</h2>
+            <button class="logout-btn" id="tenantLogoutBtn">Logout</button>
+        </div>
+        
+        <div class="dashboard-section">
+            <h3>My Profile</h3>
+            
+            <form id="tenantProfileForm" class="tenant-form">
+                <div class="photo-upload">
+                    <div class="photo-preview" id="tenantPhotoPreview">
+                        <i class="fas fa-user" style="font-size: 2rem; color: #ccc;"></i>
+                    </div>
+                    <div>
+                        <button type="button" class="upload-btn" id="uploadPhotoBtn">Upload Photo</button>
+                        <input type="file" id="tenantPhotoUpload" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="tenantBedNumber">Bed Number</label>
+                            <input type="text" id="tenantBedNumber" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantBuildingName">Building Name</label>
+                            <input type="text" id="tenantBuildingName" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantUsernameProfile">Username</label>
+                            <input type="text" id="tenantUsernameProfile" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantRentAmount">Monthly Rent (₹)</label>
+                            <input type="text" id="tenantRentAmount" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantDepositAmount">Security Deposit (₹)</label>
+                            <input type="text" id="tenantDepositAmount" readonly>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="tenantAge">Age</label>
+                            <input type="number" id="tenantAge" min="18" max="99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantGender">Gender</label>
+                            <select id="tenantGender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantProfession">Profession</label>
+                            <select id="tenantProfession" required>
+                                <option value="">Select Profession</option>
+                                <option value="student">Student</option>
+                                <option value="worker">Working Professional</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="instituteGroup">
+                            <label for="tenantInstitute">Institute Name</label>
+                            <input type="text" id="tenantInstitute">
+                        </div>
+                        <div class="form-group" id="companyGroup" style="display: none;">
+                            <label for="tenantCompany">Company Name</label>
+                            <input type="text" id="tenantCompany">
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantAddress">Institute/Company Address</label>
+                            <input type="text" id="tenantAddress">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tenantAadhar">Aadhar Card (Upload Front & Back)</label>
+                    <input type="file" id="tenantAadharFront" accept="image/*" style="margin-bottom: 10px;">
+                    <input type="file" id="tenantAadharBack" accept="image/*">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <button type="button" class="btn btn-secondary" id="changePasswordBtn">Change Password</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="dashboard-section">
+            <h3>Payment History</h3>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th>Amount Due (₹)</th>
+                        <th>Amount Paid (₹)</th>
+                        <th>Payment Date</th>
+                        <th>Status</th>
+                        <th>Receipt</th>
+                    </tr>
+                </thead>
+                <tbody id="tenantPaymentTableBody">
+                    <!-- Payment history will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('changePasswordModal').style.display='none'">&times;</span>
+            <h3>Change Password</h3>
+            <form id="passwordChangeForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Change Password</button>
+            </form>
+        </div>
+    </div>
+    
     <script>
-        // Scroll to Top Button
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
+        // Sample data for demonstration
+        const sampleData = {
+            buildings: [
+                { id: 1, name: "Main Building", address: "123 PG Street, Baner" },
+                { id: 2, name: "Annex Building", address: "125 PG Street, Baner" }
+            ],
+            rooms: [
+                { id: 101, buildingId: 1, name: "Room 101", type: "2-Sharing", capacity: 2 },
+                { id: 102, buildingId: 1, name: "Room 102", type: "3-Sharing", capacity: 3 },
+                { id: 201, buildingId: 2, name: "Room 201", type: "2-Sharing", capacity: 2 }
+            ],
+            beds: [
+                { id: 1, roomId: 101, bedNumber: "101A", status: "occupied", tenantId: 1 },
+                { id: 2, roomId: 101, bedNumber: "101B", status: "vacant" },
+                { id: 3, roomId: 102, bedNumber: "102A", status: "occupied", tenantId: 2 },
+                { id: 4, roomId: 102, bedNumber: "102B", status: "occupied", tenantId: 3 },
+                { id: 5, roomId: 102, bedNumber: "102C", status: "vacant" },
+                { id: 6, roomId: 201, bedNumber: "201A", status: "vacant" },
+                { id: 7, roomId: 201, bedNumber: "201B", status: "vacant" }
+            ],
+            tenants: [
+                { 
+                    id: 1, 
+                    username: "john_doe", 
+                    password: "password123", 
+                    fullName: "John Doe", 
+                    email: "john@example.com", 
+                    phone: "9876543210",
+                    bedId: 1,
+                    rent: 8000,
+                    deposit: 16000,
+                    age: 25,
+                    gender: "male",
+                    profession: "worker",
+                    company: "Tech Solutions Inc.",
+                    address: "456 Work Street, Pune",
+                    aadharFront: "",
+                    aadharBack: "",
+                    photo: ""
+                },
+                { 
+                    id: 2, 
+                    username: "jane_smith", 
+                    password: "password123", 
+                    fullName: "Jane Smith", 
+                    email: "jane@example.com", 
+                    phone: "9876543211",
+                    bedId: 3,
+                    rent: 7000,
+                    deposit: 14000,
+                    age: 22,
+                    gender: "female",
+                    profession: "student",
+                    institute: "Pune University",
+                    address: "Pune University Campus",
+                    aadharFront: "",
+                    aadharBack: "",
+                    photo: ""
+                },
+                { 
+                    id: 3, 
+                    username: "robert_johnson", 
+                    password: "password123", 
+                    fullName: "Robert Johnson", 
+                    email: "robert@example.com", 
+                    phone: "9876543212",
+                    bedId: 4,
+                    rent: 7000,
+                    deposit: 14000,
+                    age: 23,
+                    gender: "male",
+                    profession: "student",
+                    institute: "Symbiosis College",
+                    address: "Symbiosis Campus, Pune",
+                    aadharFront: "",
+                    aadharBack: "",
+                    photo: ""
+                }
+            ],
+            payments: [
+                { id: 1, tenantId: 1, month: 4, year: 2023, amountDue: 8000, amountPaid: 8000, paymentDate: "2023-04-05", status: "paid" },
+                { id: 2, tenantId: 1, month: 5, year: 2023, amountDue: 8000, amountPaid: 8000, paymentDate: "2023-05-03", status: "paid" },
+                { id: 3, tenantId: 1, month: 6, year: 2023, amountDue: 8000, amountPaid: 4000, paymentDate: "2023-06-10", status: "partial" },
+                { id: 4, tenantId: 2, month: 4, year: 2023, amountDue: 7000, amountPaid: 7000, paymentDate: "2023-04-01", status: "paid" },
+                { id: 5, tenantId: 2, month: 5, year: 2023, amountDue: 7000, amountPaid: 7000, paymentDate: "2023-05-01", status: "paid" },
+                { id: 6, tenantId: 2, month: 6, year: 2023, amountDue: 7000, amountPaid: 0, paymentDate: "", status: "unpaid" },
+                { id: 7, tenantId: 3, month: 4, year: 2023, amountDue: 7000, amountPaid: 7000, paymentDate: "2023-04-02", status: "paid" },
+                { id: 8, tenantId: 3, month: 5, year: 2023, amountDue: 7000, amountPaid: 7000, paymentDate: "2023-05-02", status: "paid" },
+                { id: 9, tenantId: 3, month: 6, year: 2023, amountDue: 7000, amountPaid: 7000, paymentDate: "2023-06-02", status: "paid" }
+            ],
+            expenses: [
+                { id: 1, buildingId: 1, date: "2023-04-15", category: "maintenance", description: "Plumbing repairs in Room 101", amount: 2500 },
+                { id: 2, buildingId: 1, date: "2023-04-20", category: "utilities", description: "Electricity bill April", amount: 12000 },
+                { id: 3, buildingId: 2, date: "2023-05-10", category: "supplies", description: "Cleaning supplies", amount: 3500 },
+                { id: 4, buildingId: 1, date: "2023-05-15", category: "repairs", description: "Window replacement Room 102", amount: 4500 },
+                { id: 5, buildingId: 2, date: "2023-06-01", category: "utilities", description: "Water bill May", amount: 8000 }
+            ],
+            admin: {
+                username: "admin",
+                password: "admin123"
             }
-        });
-        
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const target = document.querySelector(targetId);
-                
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+        };
+
+        // Current user state
+        let currentUser = null;
+        let isAdmin = false;
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const tenantLoginBtn = document.getElementById('tenantLoginBtn');
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const tenantLoginForm = document.getElementById('tenantLoginForm');
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const tenantDashboard = document.getElementById('tenantDashboard');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        const tenantLogoutBtn = document.getElementById('tenantLogoutBtn');
+        const changePasswordBtn = document.getElementById('changePasswordBtn');
+        const changePasswordModal = document.getElementById('changePasswordModal');
+        const passwordChangeForm = document.getElementById('passwordChangeForm');
+        const tenantProfession = document.getElementById('tenantProfession');
+        const instituteGroup = document.getElementById('instituteGroup');
+        const companyGroup = document.getElementById('companyGroup');
+        const uploadPhotoBtn = document.getElementById('uploadPhotoBtn');
+        const tenantPhotoUpload = document.getElementById('tenantPhotoUpload');
+        const tenantPhotoPreview = document.getElementById('tenantPhotoPreview');
+        const manageTenantsBtn = document.getElementById('manageTenantsBtn');
+        const manageBedsBtn = document.getElementById('manageBedsBtn');
+        const managePaymentsBtn = document.getElementById('managePaymentsBtn');
+        const managePropertiesBtn = document.getElementById('managePropertiesBtn');
+        const financialReportsBtn = document.getElementById('financialReportsBtn');
+        const expenseTrackingBtn = document.getElementById('expenseTrackingBtn');
+        const tenantManagementSection = document.getElementById('tenantManagementSection');
+        const bedManagementSection = document.getElementById('bedManagementSection');
+        const paymentManagementSection = document.getElementById('paymentManagementSection');
+        const propertyManagementSection = document.getElementById('propertyManagementSection');
+        const financialReportsSection = document.getElementById('financialReportsSection');
+        const expenseTrackingSection = document.getElementById('expenseTrackingSection');
+        const addTenantBtn = document.getElementById('addTenantBtn');
+        const addTenantModal = document.getElementById('addTenantModal');
+        const newTenantForm = document.getElementById('newTenantForm');
+        const tenantBuilding = document.getElementById('tenantBuilding');
+        const tenantRoom = document.getElementById('tenantRoom');
+        const tenantBed = document.getElementById('tenantBed');
+        const tenantTableBody = document.getElementById('tenantTableBody');
+        const bedTableBody = document.getElementById('bedTableBody');
+        const paymentTableBody = document.getElementById('paymentTableBody');
+        const expenseTableBody = document.getElementById('expenseTableBody');
+        const addExpenseBtn = document.getElementById('addExpenseBtn');
+        const addExpenseModal = document.getElementById('addExpenseModal');
+        const newExpenseForm = document.getElementById('newExpenseForm');
+        const filterBuilding = document.getElementById('filterBuilding');
+        const filterStatus = document.getElementById('filterStatus');
+        const paymentMonth = document.getElementById('paymentMonth');
+        const paymentYear = document.getElementById('paymentYear');
+        const paymentStatus = document.getElementById('paymentStatus');
+        const reportType = document.getElementById('reportType');
+        const monthlySelection = document.getElementById('monthlySelection');
+        const yearlySelection = document.getElementById('yearlySelection');
+        const customSelection = document.getElementById('customSelection');
+        const reportMonth = document.getElementById('reportMonth');
+        const reportYear = document.getElementById('reportYear');
+        const startDate = document.getElementById('startDate');
+        const endDate = document.getElementById('endDate');
+        const generateReportBtn = document.getElementById('generateReportBtn');
+        const financialChart = document.getElementById('financialChart');
+        const expenseBuilding = document.getElementById('expenseBuilding');
+        const expenseCategory = document.getElementById('expenseCategory');
+        const expenseMonth = document.getElementById('expenseMonth');
+        const expenseYear = document.getElementById('expenseYear');
+        const tenantPaymentTableBody = document.getElementById('tenantPaymentTableBody');
+        const tenantBedNumber = document.getElementById('tenantBedNumber');
+        const tenantBuildingName = document.getElementById('tenantBuildingName');
+        const tenantUsernameProfile = document.getElementById('tenantUsernameProfile');
+        const tenantRentAmount = document.getElementById('tenantRentAmount');
+        const tenantDepositAmount = document.getElementById('tenantDepositAmount');
+        const tenantAge = document.getElementById('tenantAge');
+        const tenantGender = document.getElementById('tenantGender');
+        const tenantInstitute = document.getElementById('tenantInstitute');
+        const tenantCompany = document.getElementById('tenantCompany');
+        const tenantAddress = document.getElementById('tenantAddress');
+        const tenantProfileForm = document.getElementById('tenantProfileForm');
+
+        // Initialize the application
+        function init() {
+            // Set current year in year selects
+            const currentYear = new Date().getFullYear();
+            const yearSelects = [paymentYear, reportYear, expenseYear];
+            
+            yearSelects.forEach(select => {
+                for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.textContent = i;
+                    select.appendChild(option);
+                    
+                    // Set current year as selected
+                    if (i === currentYear) {
+                        option.selected = true;
+                    }
                 }
             });
-        });
-        
-        // Photo Gallery Auto-Slider
-        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Populate building selects
+            populateBuildingSelects();
+            
+            // Set current date for expense date
+            document.getElementById('expenseDate').valueAsDate = new Date();
+            
+            // Event listeners
+            loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
+            tenantLoginBtn.addEventListener('click', () => {
+                tenantLoginBtn.classList.add('active');
+                adminLoginBtn.classList.remove('active');
+                tenantLoginForm.style.display = 'block';
+                adminLoginForm.style.display = 'none';
+            });
+            adminLoginBtn.addEventListener('click', () => {
+                adminLoginBtn.classList.add('active');
+                tenantLoginBtn.classList.remove('active');
+                adminLoginForm.style.display = 'block';
+                tenantLoginForm.style.display = 'none';
+            });
+            adminLogoutBtn.addEventListener('click', logout);
+            tenantLogoutBtn.addEventListener('click', logout);
+            changePasswordBtn.addEventListener('click', () => changePasswordModal.style.display = 'flex');
+            
+            // Form submissions
+            tenantLoginForm.addEventListener('submit', handleTenantLogin);
+            adminLoginForm.addEventListener('submit', handleAdminLogin);
+            passwordChangeForm.addEventListener('submit', handlePasswordChange);
+            tenantProfession.addEventListener('change', handleProfessionChange);
+            uploadPhotoBtn.addEventListener('click', () => tenantPhotoUpload.click());
+            tenantPhotoUpload.addEventListener('change', handlePhotoUpload);
+            
+            // Admin dashboard buttons
+            manageTenantsBtn.addEventListener('click', () => toggleSection('tenantManagement'));
+            manageBedsBtn.addEventListener('click', () => toggleSection('bedManagement'));
+            managePaymentsBtn.addEventListener('click', () => toggleSection('paymentManagement'));
+            managePropertiesBtn.addEventListener('click', () => toggleSection('propertyManagement'));
+            financialReportsBtn.addEventListener('click', () => toggleSection('financialReports'));
+            expenseTrackingBtn.addEventListener('click', () => toggleSection('expenseTracking'));
+            
+            addTenantBtn.addEventListener('click', () => addTenantModal.style.display = 'flex');
+            newTenantForm.addEventListener('submit', handleAddTenant);
+            tenantBuilding.addEventListener('change', populateRooms);
+            tenantRoom.addEventListener('change', populateBeds);
+            
+            addExpenseBtn.addEventListener('click', () => addExpenseModal.style.display = 'flex');
+            newExpenseForm.addEventListener('submit', handleAddExpense);
+            
+            // Filter changes
+            filterBuilding.addEventListener('change', filterBeds);
+            filterStatus.addEventListener('change', filterBeds);
+            paymentMonth.addEventListener('change', filterPayments);
+            paymentYear.addEventListener('change', filterPayments);
+            paymentStatus.addEventListener('change', filterPayments);
+            reportType.addEventListener('change', handleReportTypeChange);
+            generateReportBtn.addEventListener('click', generateFinancialReport);
+            expenseBuilding.addEventListener('change', filterExpenses);
+            expenseCategory.addEventListener('change', filterExpenses);
+            expenseMonth.addEventListener('change', filterExpenses);
+            expenseYear.addEventListener('change', filterExpenses);
+            
+            // Tenant profile form
+            tenantProfileForm.addEventListener('submit', handleTenantProfileUpdate);
+            
+            // Initialize charts
+            initFinancialChart();
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
+            
+            // Photo Gallery Auto-Slider
+            initPhotoGallery();
+            
+            // Scroll to Top Button
+            initScrollToTop();
+        }
+
+        // Handle tenant login
+        function handleTenantLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('tenantUsername').value;
+            const password = document.getElementById('tenantPassword').value;
+            
+            const tenant = sampleData.tenants.find(t => t.username === username && t.password === password);
+            
+            if (tenant) {
+                currentUser = tenant;
+                isAdmin = false;
+                loginModal.style.display = 'none';
+                showTenantDashboard();
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        // Handle admin login
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === sampleData.admin.username && password === sampleData.admin.password) {
+                currentUser = sampleData.admin;
+                isAdmin = true;
+                loginModal.style.display = 'none';
+                showAdminDashboard();
+            } else {
+                alert('Invalid admin credentials');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            isAdmin = false;
+            hideAllDashboards();
+            resetForms();
+        }
+
+        // Show admin dashboard
+        function showAdminDashboard() {
+            document.body.style.overflow = 'auto';
+            adminDashboard.style.display = 'block';
+            tenantDashboard.style.display = 'none';
+            
+            // Populate tenant table
+            populateTenantTable();
+            
+            // Populate bed table
+            populateBedTable();
+            
+            // Populate payment table
+            populatePaymentTable();
+            
+            // Populate expense table
+            populateExpenseTable();
+            
+            // Hide all sections initially
+            hideAllSections();
+        }
+
+        // Show tenant dashboard
+        function showTenantDashboard() {
+            document.body.style.overflow = 'auto';
+            adminDashboard.style.display = 'none';
+            tenantDashboard.style.display = 'block';
+            
+            // Populate tenant profile
+            populateTenantProfile();
+            
+            // Populate tenant payment history
+            populateTenantPaymentHistory();
+        }
+
+        // Hide all dashboards
+        function hideAllDashboards() {
+            adminDashboard.style.display = 'none';
+            tenantDashboard.style.display = 'none';
+        }
+
+        // Hide all admin sections
+        function hideAllSections() {
+            tenantManagementSection.style.display = 'none';
+            bedManagementSection.style.display = 'none';
+            paymentManagementSection.style.display = 'none';
+            propertyManagementSection.style.display = 'none';
+            financialReportsSection.style.display = 'none';
+            expenseTrackingSection.style.display = 'none';
+        }
+
+        // Toggle admin sections
+        function toggleSection(section) {
+            hideAllSections();
+            
+            switch (section) {
+                case 'tenantManagement':
+                    tenantManagementSection.style.display = 'block';
+                    break;
+                case 'bedManagement':
+                    bedManagementSection.style.display = 'block';
+                    break;
+                case 'paymentManagement':
+                    paymentManagementSection.style.display = 'block';
+                    break;
+                case 'propertyManagement':
+                    propertyManagementSection.style.display = 'block';
+                    break;
+                case 'financialReports':
+                    financialReportsSection.style.display = 'block';
+                    break;
+                case 'expenseTracking':
+                    expenseTrackingSection.style.display = 'block';
+                    break;
+            }
+        }
+
+        // Handle password change
+        function handlePasswordChange(e) {
+            e.preventDefault();
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match');
+                return;
+            }
+            
+            if (currentUser.password !== currentPassword) {
+                alert('Current password is incorrect');
+                return;
+            }
+            
+            currentUser.password = newPassword;
+            alert('Password changed successfully');
+            changePasswordModal.style.display = 'none';
+            passwordChangeForm.reset();
+        }
+
+        // Handle profession change
+        function handleProfessionChange() {
+            if (tenantProfession.value === 'student') {
+                instituteGroup.style.display = 'block';
+                companyGroup.style.display = 'none';
+            } else if (tenantProfession.value === 'worker') {
+                instituteGroup.style.display = 'none';
+                companyGroup.style.display = 'block';
+            } else {
+                instituteGroup.style.display = 'none';
+                companyGroup.style.display = 'none';
+            }
+        }
+
+        // Handle photo upload
+        function handlePhotoUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    tenantPhotoPreview.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    tenantPhotoPreview.appendChild(img);
+                    currentUser.photo = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Populate tenant table
+        function populateTenantTable() {
+            tenantTableBody.innerHTML = '';
+            
+            sampleData.tenants.forEach(tenant => {
+                const bed = sampleData.beds.find(b => b.id === tenant.bedId);
+                const room = bed ? sampleData.rooms.find(r => r.id === bed.roomId) : null;
+                const building = room ? sampleData.buildings.find(b => b.id === room.buildingId) : null;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${tenant.id}</td>
+                    <td>${tenant.fullName}</td>
+                    <td>${bed ? bed.bedNumber : 'N/A'}</td>
+                    <td>${building ? building.name : 'N/A'}</td>
+                    <td><span class="status-badge ${bed && bed.status === 'occupied' ? 'occupied' : 'vacant'}">${bed && bed.status === 'occupied' ? 'Occupied' : 'Vacant'}</span></td>
+                    <td class="table-actions">
+                        <button class="btn btn-primary" onclick="editTenant(${tenant.id})">Edit</button>
+                        <button class="btn btn-secondary" onclick="viewTenant(${tenant.id})">View</button>
+                    </td>
+                `;
+                tenantTableBody.appendChild(row);
+            });
+        }
+
+        // Populate bed table
+        function populateBedTable() {
+            bedTableBody.innerHTML = '';
+            
+            sampleData.beds.forEach(bed => {
+                const room = sampleData.rooms.find(r => r.id === bed.roomId);
+                const building = room ? sampleData.buildings.find(b => b.id === room.buildingId) : null;
+                const tenant = bed.status === 'occupied' ? sampleData.tenants.find(t => t.bedId === bed.id) : null;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${bed.id}</td>
+                    <td>${building ? building.name : 'N/A'}</td>
+                    <td>${room ? room.name : 'N/A'}</td>
+                    <td>${bed.bedNumber}</td>
+                    <td><span class="status-badge ${bed.status === 'occupied' ? 'occupied' : 'vacant'}">${bed.status === 'occupied' ? 'Occupied' : 'Vacant'}</span></td>
+                    <td>${tenant ? tenant.fullName : 'N/A'}</td>
+                    <td class="table-actions">
+                        ${bed.status === 'vacant' ? 
+                            `<button class="btn btn-primary" onclick="assignTenant(${bed.id})">Assign</button>` : 
+                            `<button class="btn btn-secondary" onclick="unassignTenant(${bed.id})">Unassign</button>`
+                        }
+                    </td>
+                `;
+                bedTableBody.appendChild(row);
+            });
+        }
+
+        // Populate payment table
+        function populatePaymentTable() {
+            paymentTableBody.innerHTML = '';
+            
+            sampleData.payments.forEach(payment => {
+                const tenant = sampleData.tenants.find(t => t.id === payment.tenantId);
+                const bed = tenant ? sampleData.beds.find(b => b.id === tenant.bedId) : null;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${tenant ? tenant.fullName : 'N/A'}</td>
+                    <td>${bed ? bed.bedNumber : 'N/A'}</td>
+                    <td>${getMonthName(payment.month)}</td>
+                    <td>${payment.year}</td>
+                    <td>₹${payment.amountDue.toLocaleString()}</td>
+                    <td>₹${payment.amountPaid.toLocaleString()}</td>
+                    <td><span class="status-badge ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td>
+                    <td class="table-actions">
+                        <button class="btn btn-primary" onclick="recordPayment(${payment.id})">Record Payment</button>
+                    </td>
+                `;
+                paymentTableBody.appendChild(row);
+            });
+        }
+
+        // Populate expense table
+        function populateExpenseTable() {
+            expenseTableBody.innerHTML = '';
+            
+            sampleData.expenses.forEach(expense => {
+                const building = sampleData.buildings.find(b => b.id === expense.buildingId);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>${building ? building.name : 'N/A'}</td>
+                    <td>${expense.category.charAt(0).toUpperCase() + expense.category.slice(1)}</td>
+                    <td>${expense.description}</td>
+                    <td>₹${expense.amount.toLocaleString()}</td>
+                    <td class="table-actions">
+                        <button class="btn btn-primary" onclick="editExpense(${expense.id})">Edit</button>
+                        <button class="btn btn-secondary" onclick="deleteExpense(${expense.id})">Delete</button>
+                    </td>
+                `;
+                expenseTableBody.appendChild(row);
+            });
+        }
+
+        // Populate tenant profile
+        function populateTenantProfile() {
+            if (!currentUser) return;
+            
+            const bed = sampleData.beds.find(b => b.id === currentUser.bedId);
+            const room = bed ? sampleData.rooms.find(r => r.id === bed.roomId) : null;
+            const building = room ? sampleData.buildings.find(b => b.id === room.buildingId) : null;
+            
+            tenantBedNumber.value = bed ? bed.bedNumber : 'N/A';
+            tenantBuildingName.value = building ? building.name : 'N/A';
+            tenantUsernameProfile.value = currentUser.username;
+            tenantRentAmount.value = currentUser.rent;
+            tenantDepositAmount.value = currentUser.deposit;
+            tenantAge.value = currentUser.age || '';
+            tenantGender.value = currentUser.gender || '';
+            tenantProfession.value = currentUser.profession || '';
+            
+            if (currentUser.profession === 'student') {
+                tenantInstitute.value = currentUser.institute || '';
+                instituteGroup.style.display = 'block';
+                companyGroup.style.display = 'none';
+            } else if (currentUser.profession === 'worker') {
+                tenantCompany.value = currentUser.company || '';
+                instituteGroup.style.display = 'none';
+                companyGroup.style.display = 'block';
+            } else {
+                instituteGroup.style.display = 'none';
+                companyGroup.style.display = 'none';
+            }
+            
+            tenantAddress.value = currentUser.address || '';
+            
+            if (currentUser.photo) {
+                tenantPhotoPreview.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = currentUser.photo;
+                tenantPhotoPreview.appendChild(img);
+            } else {
+                tenantPhotoPreview.innerHTML = '<i class="fas fa-user" style="font-size: 2rem; color: #ccc;"></i>';
+            }
+        }
+
+        // Populate tenant payment history
+        function populateTenantPaymentHistory() {
+            if (!currentUser) return;
+            
+            tenantPaymentTableBody.innerHTML = '';
+            
+            const tenantPayments = sampleData.payments.filter(p => p.tenantId === currentUser.id);
+            
+            tenantPayments.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${getMonthName(payment.month)}</td>
+                    <td>${payment.year}</td>
+                    <td>₹${payment.amountDue.toLocaleString()}</td>
+                    <td>₹${payment.amountPaid.toLocaleString()}</td>
+                    <td>${payment.paymentDate || 'N/A'}</td>
+                    <td><span class="status-badge ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td>
+                    <td>
+                        ${payment.status === 'paid' ? 
+                            `<button class="btn btn-primary">Download</button>` : 
+                            `<button class="btn btn-secondary" onclick="makePayment(${payment.id})">Pay Now</button>`
+                        }
+                    </td>
+                `;
+                tenantPaymentTableBody.appendChild(row);
+            });
+        }
+
+        // Handle add tenant
+        function handleAddTenant(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('tenantFullName').value;
+            const email = document.getElementById('tenantEmail').value;
+            const phone = document.getElementById('tenantPhone').value;
+            const buildingId = parseInt(document.getElementById('tenantBuilding').value);
+            const roomId = parseInt(document.getElementById('tenantRoom').value);
+            const bedId = parseInt(document.getElementById('tenantBed').value);
+            const rent = parseFloat(document.getElementById('tenantRent').value);
+            const deposit = parseFloat(document.getElementById('tenantDeposit').value);
+            
+            // Generate username (firstname.lastname)
+            const username = fullName.toLowerCase().replace(/\s+/g, '.');
+            
+            // Create new tenant
+            const newTenant = {
+                id: sampleData.tenants.length + 1,
+                username: username,
+                password: 'welcome123', // Default password
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                bedId: bedId,
+                rent: rent,
+                deposit: deposit,
+                age: '',
+                gender: '',
+                profession: '',
+                institute: '',
+                company: '',
+                address: '',
+                aadharFront: '',
+                aadharBack: '',
+                photo: ''
+            };
+            
+            // Add to sample data
+            sampleData.tenants.push(newTenant);
+            
+            // Update bed status
+            const bedIndex = sampleData.beds.findIndex(b => b.id === bedId);
+            if (bedIndex !== -1) {
+                sampleData.beds[bedIndex].status = 'occupied';
+                sampleData.beds[bedIndex].tenantId = newTenant.id;
+            }
+            
+            // Close modal and refresh
+            addTenantModal.style.display = 'none';
+            newTenantForm.reset();
+            populateTenantTable();
+            populateBedTable();
+            
+            alert('Tenant added successfully! Default password is "welcome123"');
+        }
+
+        // Handle add expense
+        function handleAddExpense(e) {
+            e.preventDefault();
+            
+            const date = document.getElementById('expenseDate').value;
+            const buildingId = parseInt(document.getElementById('expenseBuildingSelect').value);
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+            const category = document.getElementById('expenseCategorySelect').value;
+            const description = document.getElementById('expenseDescription').value;
+            
+            // Create new expense
+            const newExpense = {
+                id: sampleData.expenses.length + 1,
+                buildingId: buildingId,
+                date: date,
+                category: category,
+                description: description,
+                amount: amount
+            };
+            
+            // Add to sample data
+            sampleData.expenses.push(newExpense);
+            
+            // Close modal and refresh
+            addExpenseModal.style.display = 'none';
+            newExpenseForm.reset();
+            populateExpenseTable();
+            
+            alert('Expense added successfully!');
+        }
+
+        // Handle tenant profile update
+        function handleTenantProfileUpdate(e) {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+            
+            // Update tenant data
+            currentUser.age = tenantAge.value;
+            currentUser.gender = tenantGender.value;
+            currentUser.profession = tenantProfession.value;
+            
+            if (currentUser.profession === 'student') {
+                currentUser.institute = tenantInstitute.value;
+                currentUser.company = '';
+            } else if (currentUser.profession === 'worker') {
+                currentUser.company = tenantCompany.value;
+                currentUser.institute = '';
+            }
+            
+            currentUser.address = tenantAddress.value;
+            
+            alert('Profile updated successfully!');
+        }
+
+        // Populate building selects
+        function populateBuildingSelects() {
+            const buildingSelects = [
+                tenantBuilding,
+                filterBuilding,
+                expenseBuilding,
+                document.getElementById('expenseBuildingSelect')
+            ];
+            
+            buildingSelects.forEach(select => {
+                select.innerHTML = '<option value="">Select Building</option>';
+                sampleData.buildings.forEach(building => {
+                    const option = document.createElement('option');
+                    option.value = building.id;
+                    option.textContent = building.name;
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        // Populate rooms based on selected building
+        function populateRooms() {
+            const buildingId = parseInt(tenantBuilding.value);
+            
+            tenantRoom.innerHTML = '<option value="">Select Room</option>';
+            tenantRoom.disabled = !buildingId;
+            
+            if (buildingId) {
+                const buildingRooms = sampleData.rooms.filter(r => r.buildingId === buildingId);
+                
+                buildingRooms.forEach(room => {
+                    const option = document.createElement('option');
+                    option.value = room.id;
+                    option.textContent = `${room.name} (${room.type})`;
+                    tenantRoom.appendChild(option);
+                });
+            }
+            
+            // Reset beds
+            tenantBed.innerHTML = '<option value="">Select Bed</option>';
+            tenantBed.disabled = true;
+        }
+
+        // Populate beds based on selected room
+        function populateBeds() {
+            const roomId = parseInt(tenantRoom.value);
+            
+            tenantBed.innerHTML = '<option value="">Select Bed</option>';
+            tenantBed.disabled = !roomId;
+            
+            if (roomId) {
+                const roomBeds = sampleData.beds.filter(b => b.roomId === roomId && b.status === 'vacant');
+                
+                roomBeds.forEach(bed => {
+                    const option = document.createElement('option');
+                    option.value = bed.id;
+                    option.textContent = bed.bedNumber;
+                    tenantBed.appendChild(option);
+                });
+            }
+        }
+
+        // Filter beds
+        function filterBeds() {
+            const buildingId = parseInt(filterBuilding.value);
+            const status = filterStatus.value;
+            
+            bedTableBody.innerHTML = '';
+            
+            let filteredBeds = [...sampleData.beds];
+            
+            if (buildingId) {
+                const buildingRooms = sampleData.rooms.filter(r => r.buildingId === buildingId);
+                const roomIds = buildingRooms.map(r => r.id);
+                filteredBeds = filteredBeds.filter(b => roomIds.includes(b.roomId));
+            }
+            
+            if (status) {
+                filteredBeds = filteredBeds.filter(b => b.status === status);
+            }
+            
+            filteredBeds.forEach(bed => {
+                const room = sampleData.rooms.find(r => r.id === bed.roomId);
+                const building = room ? sampleData.buildings.find(b => b.id === room.buildingId) : null;
+                const tenant = bed.status === 'occupied' ? sampleData.tenants.find(t => t.bedId === bed.id) : null;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${bed.id}</td>
+                    <td>${building ? building.name : 'N/A'}</td>
+                    <td>${room ? room.name : 'N/A'}</td>
+                    <td>${bed.bedNumber}</td>
+                    <td><span class="status-badge ${bed.status === 'occupied' ? 'occupied' : 'vacant'}">${bed.status === 'occupied' ? 'Occupied' : 'Vacant'}</span></td>
+                    <td>${tenant ? tenant.fullName : 'N/A'}</td>
+                    <td class="table-actions">
+                        ${bed.status === 'vacant' ? 
+                            `<button class="btn btn-primary" onclick="assignTenant(${bed.id})">Assign</button>` : 
+                            `<button class="btn btn-secondary" onclick="unassignTenant(${bed.id})">Unassign</button>`
+                        }
+                    </td>
+                `;
+                bedTableBody.appendChild(row);
+            });
+        }
+
+        // Filter payments
+        function filterPayments() {
+            const month = paymentMonth.value;
+            const year = paymentYear.value;
+            const status = paymentStatus.value;
+            
+            paymentTableBody.innerHTML = '';
+            
+            let filteredPayments = [...sampleData.payments];
+            
+            if (month) {
+                filteredPayments = filteredPayments.filter(p => p.month === parseInt(month));
+            }
+            
+            if (year) {
+                filteredPayments = filteredPayments.filter(p => p.year === parseInt(year));
+            }
+            
+            if (status) {
+                filteredPayments = filteredPayments.filter(p => p.status === status);
+            }
+            
+            filteredPayments.forEach(payment => {
+                const tenant = sampleData.tenants.find(t => t.id === payment.tenantId);
+                const bed = tenant ? sampleData.beds.find(b => b.id === tenant.bedId) : null;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${tenant ? tenant.fullName : 'N/A'}</td>
+                    <td>${bed ? bed.bedNumber : 'N/A'}</td>
+                    <td>${getMonthName(payment.month)}</td>
+                    <td>${payment.year}</td>
+                    <td>₹${payment.amountDue.toLocaleString()}</td>
+                    <td>₹${payment.amountPaid.toLocaleString()}</td>
+                    <td><span class="status-badge ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td>
+                    <td class="table-actions">
+                        <button class="btn btn-primary" onclick="recordPayment(${payment.id})">Record Payment</button>
+                    </td>
+                `;
+                paymentTableBody.appendChild(row);
+            });
+        }
+
+        // Filter expenses
+        function filterExpenses() {
+            const buildingId = parseInt(expenseBuilding.value);
+            const category = expenseCategory.value;
+            const month = expenseMonth.value;
+            const year = expenseYear.value;
+            
+            expenseTableBody.innerHTML = '';
+            
+            let filteredExpenses = [...sampleData.expenses];
+            
+            if (buildingId) {
+                filteredExpenses = filteredExpenses.filter(e => e.buildingId === buildingId);
+            }
+            
+            if (category) {
+                filteredExpenses = filteredExpenses.filter(e => e.category === category);
+            }
+            
+            if (month) {
+                filteredExpenses = filteredExpenses.filter(e => {
+                    const date = new Date(e.date);
+                    return date.getMonth() + 1 === parseInt(month);
+                });
+            }
+            
+            if (year) {
+                filteredExpenses = filteredExpenses.filter(e => {
+                    const date = new Date(e.date);
+                    return date.getFullYear() === parseInt(year);
+                });
+            }
+            
+            filteredExpenses.forEach(expense => {
+                const building = sampleData.buildings.find(b => b.id === expense.buildingId);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>${building ? building.name : 'N/A'}</td>
+                    <td>${expense.category.charAt(0).toUpperCase() + expense.category.slice(1)}</td>
+                    <td>${expense.description}</td>
+                    <td>₹${expense.amount.toLocaleString()}</td>
+                    <td class="table-actions">
+                        <button class="btn btn-primary" onclick="editExpense(${expense.id})">Edit</button>
+                        <button class="btn btn-secondary" onclick="deleteExpense(${expense.id})">Delete</button>
+                    </td>
+                `;
+                expenseTableBody.appendChild(row);
+            });
+        }
+
+        // Handle report type change
+        function handleReportTypeChange() {
+            const type = reportType.value;
+            
+            monthlySelection.style.display = 'none';
+            yearlySelection.style.display = 'none';
+            customSelection.style.display = 'none';
+            
+            if (type === 'monthly') {
+                monthlySelection.style.display = 'block';
+                yearlySelection.style.display = 'block';
+            } else if (type === 'yearly') {
+                yearlySelection.style.display = 'block';
+            } else if (type === 'custom') {
+                customSelection.style.display = 'block';
+            }
+        }
+
+        // Generate financial report
+        function generateFinancialReport() {
+            const type = reportType.value;
+            let labels = [];
+            let incomeData = [];
+            let expenseData = [];
+            
+            if (type === 'monthly') {
+                const year = parseInt(reportYear.value);
+                const month = reportMonth.value ? parseInt(reportMonth.value) : null;
+                
+                if (month) {
+                    // Single month report
+                    labels = ['Rent Income', 'Other Income', 'Total Income', 'Expenses', 'Profit/Loss'];
+                    
+                    // Calculate income (rent payments for the month)
+                    const monthPayments = sampleData.payments.filter(p => 
+                        p.year === year && p.month === month
+                    );
+                    const rentIncome = monthPayments.reduce((sum, p) => sum + p.amountPaid, 0);
+                    
+                    // Other income (can be added to sample data if needed)
+                    const otherIncome = 0;
+                    
+                    // Calculate expenses for the month
+                    const monthExpenses = sampleData.expenses.filter(e => {
+                        const date = new Date(e.date);
+                        return date.getFullYear() === year && date.getMonth() + 1 === month;
+                    });
+                    const expenses = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
+                    
+                    incomeData = [rentIncome, otherIncome, rentIncome + otherIncome, expenses, (rentIncome + otherIncome) - expenses];
+                } else {
+                    // Monthly report for the year
+                    labels = [
+                        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                    ];
+                    
+                    for (let m = 1; m <= 12; m++) {
+                        // Calculate income for each month
+                        const monthPayments = sampleData.payments.filter(p => 
+                            p.year === year && p.month === m
+                        );
+                        const rentIncome = monthPayments.reduce((sum, p) => sum + p.amountPaid, 0);
+                        
+                        // Calculate expenses for each month
+                        const monthExpenses = sampleData.expenses.filter(e => {
+                            const date = new Date(e.date);
+                            return date.getFullYear() === year && date.getMonth() + 1 === m;
+                        });
+                        const expenses = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
+                        
+                        incomeData.push(rentIncome);
+                        expenseData.push(expenses);
+                    }
+                }
+            } else if (type === 'yearly') {
+                const year = reportYear.value ? parseInt(reportYear.value) : null;
+                
+                if (year) {
+                    // Single year report by month (same as monthly report for year)
+                    labels = [
+                        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                    ];
+                    
+                    for (let m = 1; m <= 12; m++) {
+                        const monthPayments = sampleData.payments.filter(p => 
+                            p.year === year && p.month === m
+                        );
+                        const rentIncome = monthPayments.reduce((sum, p) => sum + p.amountPaid, 0);
+                        
+                        const monthExpenses = sampleData.expenses.filter(e => {
+                            const date = new Date(e.date);
+                            return date.getFullYear() === year && date.getMonth() + 1 === m;
+                        });
+                        const expenses = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
+                        
+                        incomeData.push(rentIncome);
+                        expenseData.push(expenses);
+                    }
+                } else {
+                    // Yearly report for multiple years
+                    const currentYear = new Date().getFullYear();
+                    const years = Array.from(new Set(sampleData.payments.map(p => p.year)));
+                    
+                    labels = years.map(y => y.toString());
+                    
+                    years.forEach(y => {
+                        const yearPayments = sampleData.payments.filter(p => p.year === y);
+                        const rentIncome = yearPayments.reduce((sum, p) => sum + p.amountPaid, 0);
+                        
+                        const yearExpenses = sampleData.expenses.filter(e => {
+                            const date = new Date(e.date);
+                            return date.getFullYear() === y;
+                        });
+                        const expenses = yearExpenses.reduce((sum, e) => sum + e.amount, 0);
+                        
+                        incomeData.push(rentIncome);
+                        expenseData.push(expenses);
+                    });
+                }
+            } else if (type === 'custom') {
+                const start = new Date(startDate.value);
+                const end = new Date(endDate.value);
+                
+                if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+                    alert('Please select valid start and end dates');
+                    return;
+                }
+                
+                // Generate month labels between dates
+                const monthLabels = [];
+                const current = new Date(start);
+                
+                while (current <= end) {
+                    monthLabels.push(current.toLocaleString('default', { month: 'short', year: 'numeric' }));
+                    current.setMonth(current.getMonth() + 1);
+                }
+                
+                labels = monthLabels;
+                
+                // Calculate data for each month
+                monthLabels.forEach((label, i) => {
+                    const year = start.getFullYear() + Math.floor((start.getMonth() + i) / 12);
+                    const month = (start.getMonth() + i) % 12 + 1;
+                    
+                    const monthPayments = sampleData.payments.filter(p => 
+                        p.year === year && p.month === month
+                    );
+                    const rentIncome = monthPayments.reduce((sum, p) => sum + p.amountPaid, 0);
+                    
+                    const monthExpenses = sampleData.expenses.filter(e => {
+                        const date = new Date(e.date);
+                        return date.getFullYear() === year && date.getMonth() + 1 === month;
+                    });
+                    const expenses = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
+                    
+                    incomeData.push(rentIncome);
+                    expenseData.push(expenses);
+                });
+            }
+            
+            // Update chart
+            updateFinancialChart(labels, incomeData, expenseData);
+            
+            // Generate summary
+            generateReportSummary(labels, incomeData, expenseData);
+        }
+
+        // Initialize financial chart
+        function initFinancialChart() {
+            const ctx = financialChart.getContext('2d');
+            window.financialChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Income',
+                            backgroundColor: '#00D2AA',
+                            data: []
+                        },
+                        {
+                            label: 'Expenses',
+                            backgroundColor: '#FF5F6D',
+                            data: []
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amount (₹)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Period'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Financial Report'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ₹${context.raw.toLocaleString()}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update financial chart
+        function updateFinancialChart(labels, incomeData, expenseData) {
+            // Determine if we're showing a single month breakdown or time series
+            if (labels.length === 5 && labels[0] === 'Rent Income') {
+                // Single month breakdown
+                window.financialChart.data.labels = labels;
+                window.financialChart.data.datasets = [
+                    {
+                        label: 'Amount',
+                        backgroundColor: [
+                            '#2A2B8D', // Rent Income
+                            '#7B2DDE', // Other Income
+                            '#00D2AA', // Total Income
+                            '#FF5F6D', // Expenses
+                            '#FFC371'  // Profit/Loss
+                        ],
+                        data: incomeData
+                    }
+                ];
+                window.financialChart.options.scales.x.title.text = 'Category';
+                window.financialChart.options.scales.y.title.text = 'Amount (₹)';
+                window.financialChart.options.plugins.title.text = 'Monthly Financial Breakdown';
+                window.financialChart.type = 'bar';
+            } else {
+                // Time series data
+                window.financialChart.data.labels = labels;
+                window.financialChart.data.datasets = [
+                    {
+                        label: 'Income',
+                        backgroundColor: '#00D2AA',
+                        data: incomeData
+                    },
+                    {
+                        label: 'Expenses',
+                        backgroundColor: '#FF5F6D',
+                        data: expenseData
+                    }
+                ];
+                window.financialChart.options.scales.x.title.text = 'Period';
+                window.financialChart.options.scales.y.title.text = 'Amount (₹)';
+                window.financialChart.options.plugins.title.text = 'Income vs Expenses';
+                window.financialChart.type = 'bar';
+            }
+            
+            window.financialChart.update();
+        }
+
+        // Generate report summary
+        function generateReportSummary(labels, incomeData, expenseData) {
+            const reportSummary = document.getElementById('reportSummary');
+            
+            if (labels.length === 5 && labels[0] === 'Rent Income') {
+                // Single month summary
+                const totalIncome = incomeData[2];
+                const totalExpenses = incomeData[3];
+                const profitLoss = incomeData[4];
+                
+                reportSummary.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;">
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: var(--secondary);">Total Income</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold; color: #00D2AA;">₹${totalIncome.toLocaleString()}</p>
+                        </div>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: var(--secondary);">Total Expenses</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold; color: #FF5F6D;">₹${totalExpenses.toLocaleString()}</p>
+                        </div>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: var(--secondary);">Profit/Loss</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold; color: ${profitLoss >= 0 ? '#00D2AA' : '#FF5F6D'};">₹${Math.abs(profitLoss).toLocaleString()} ${profitLoss >= 0 ? 'Profit' : 'Loss'}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Time series summary
+                const totalIncome = incomeData.reduce((sum, val) => sum + val, 0);
+                const totalExpenses = expenseData.reduce((sum, val) => sum + val, 0);
+                const profitLoss = totalIncome - totalExpenses;
+                
+                reportSummary.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;">
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: var(--secondary);">Total Income</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold; color: #00D2AA;">₹${totalIncome.toLocaleString()}</p>
+                        </div>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: var(--secondary);">Total Expenses</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold; color: #FF5F6D;">₹${totalExpenses.toLocaleString()}</p>
+                        </div>
+                        <div style="background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center;">
+                            <h4 style="margin-bottom: 10px; color: var(--secondary);">Profit/Loss</h4>
+                            <p style="font-size: 1.5rem; font-weight: bold; color: ${profitLoss >= 0 ? '#00D2AA' : '#FF5F6D'};">₹${Math.abs(profitLoss).toLocaleString()} ${profitLoss >= 0 ? 'Profit' : 'Loss'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Helper function to get month name
+        function getMonthName(monthNumber) {
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            return months[monthNumber - 1];
+        }
+
+        // Reset forms
+        function resetForms() {
+            tenantLoginForm.reset();
+            adminLoginForm.reset();
+            passwordChangeForm.reset();
+            newTenantForm.reset();
+            newExpenseForm.reset();
+            tenantProfileForm.reset();
+        }
+
+        // Initialize photo gallery
+        function initPhotoGallery() {
             const slides = document.querySelector('.gallery-slides');
             const dots = document.querySelectorAll('.gallery-dot');
             const totalSlides = document.querySelectorAll('.gallery-slide').length;
@@ -840,14 +3018,82 @@
 
             // Initialize
             startSlider();
-        });
+        }
 
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target == document.getElementById('bookingModal')) {
-                document.getElementById('bookingModal').style.display = 'none';
+        // Initialize scroll to top button
+        function initScrollToTop() {
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Admin functions (would be implemented in a real application)
+        function editTenant(id) {
+            alert(`Edit tenant with ID: ${id} (functionality to be implemented)`);
+        }
+
+        function viewTenant(id) {
+            alert(`View tenant with ID: ${id} (functionality to be implemented)`);
+        }
+
+        function assignTenant(bedId) {
+            alert(`Assign tenant to bed ID: ${bedId} (functionality to be implemented)`);
+        }
+
+        function unassignTenant(bedId) {
+            alert(`Unassign tenant from bed ID: ${bedId} (functionality to be implemented)`);
+        }
+
+        function recordPayment(paymentId) {
+            alert(`Record payment for payment ID: ${paymentId} (functionality to be implemented)`);
+        }
+
+        function editExpense(expenseId) {
+            alert(`Edit expense with ID: ${expenseId} (functionality to be implemented)`);
+        }
+
+        function deleteExpense(expenseId) {
+            if (confirm('Are you sure you want to delete this expense?')) {
+                alert(`Expense with ID: ${expenseId} would be deleted (functionality to be implemented)`);
             }
-        });
+        }
+
+        function makePayment(paymentId) {
+            alert(`Make payment for payment ID: ${paymentId} (functionality to be implemented)`);
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
