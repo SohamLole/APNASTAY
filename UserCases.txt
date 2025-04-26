@@ -28,7 +28,7 @@
 					iv.		Profession (student/worker – if worker then specify profession).
 					v.		Student Specify Institute/ worker specify company.
 					vi.		Address of Institute/Company.
-					vii.	
+					vii.	place to upload adhaar card photo
 	b.	Only ADMIN can create a TENANT account.
 	c.	After Creating TENANT account - TENANT can change password after LOGIN.
 	d.	ADMIN can terminate TENANT account. (But should still retain TENANT Information with ADMIN).
